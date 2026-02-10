@@ -26,6 +26,9 @@ jobs:
         run: |
            pip install -r requirements.txt
 
+      - name: Listar arquivos para conferir
+        run: ls -R
+      
       - name: Executar Script de Atualização
         env:
           # Passando os segredos do GitHub para o ambiente do script
