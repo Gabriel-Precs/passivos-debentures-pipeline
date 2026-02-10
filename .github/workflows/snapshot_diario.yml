@@ -1,0 +1,33 @@
+name: Pipeline Supabase Diário
+
+on:
+  schedule:
+    # Roda todos os dias às 06:00 UTC (03:00 no horário de Brasília)
+    - cron: '0 10 * * *'
+  
+  # Botão para testar manualmente quando quiser
+  workflow_dispatch:
+
+jobs:
+  update-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip' # Acelera as próximas execuções
+
+      - name: Instalar Dependências
+        run: |
+           pip install -r requirements.txt
+
+      - name: Executar Script de Atualização
+        env:
+          # Passando os segredos do GitHub para o ambiente do script
+          SUPABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python gerar_snapshot_diario.py
