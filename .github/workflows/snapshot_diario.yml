@@ -3,7 +3,7 @@ name: Pipeline Supabase Diário
 on:
   schedule:
     # Roda todos os dias às 06:00 UTC (03:00 no horário de Brasília)
-    - cron: '0 10 * * *'
+    - cron: '0 12 * * *'
   
   # Botão para testar manualmente quando quiser
   workflow_dispatch:
